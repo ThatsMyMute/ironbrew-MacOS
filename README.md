@@ -1,3 +1,11 @@
+# Welcome To the Fun Updates Branch!
+
+This is basically me just messing around with things like changing strings names adding funky things that might break things or not work.
+Most of the updates here will probably never seen the main branch or beta but will be here if your really intrested! 
+
+Same instructions as before maybe a couple changes in the future idk we will see!
+
+
 # IronBrew 2 (macOS setup)
 
 VM-based Lua 5.1 obfuscation with a macOS-friendly workflow.

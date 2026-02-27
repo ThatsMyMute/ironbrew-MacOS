@@ -156,7 +156,7 @@ If needed, add loader integrity checks and early abort behavior for patched prim
 
 * Ps yes ai wrote this description I have other things to do...
 ## Known Constant Dump Methods
-
+`Please note these still take a few braincells to use so slightly better than before. With concat dump at top.`
 Thanks to Norb for finding these 
 Method #1 
 

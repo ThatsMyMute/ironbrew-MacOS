@@ -1,0 +1,17 @@
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/bin/Debug/netcoreapp3.1/IronBrew2 CLI
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/bin/Debug/netcoreapp3.1/IronBrew2 CLI.deps.json
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/bin/Debug/netcoreapp3.1/IronBrew2 CLI.runtimeconfig.json
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/bin/Debug/netcoreapp3.1/IronBrew2 CLI.runtimeconfig.dev.json
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/bin/Debug/netcoreapp3.1/IronBrew2 CLI.dll
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/bin/Debug/netcoreapp3.1/IronBrew2 CLI.pdb
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/bin/Debug/netcoreapp3.1/IronBrew2.dll
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/bin/Debug/netcoreapp3.1/IronBrew2.pdb
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/obj/Debug/netcoreapp3.1/IronBrew2 CLI.csproj.AssemblyReference.cache
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/obj/Debug/netcoreapp3.1/IronBrew2 CLI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/obj/Debug/netcoreapp3.1/IronBrew2 CLI.AssemblyInfoInputs.cache
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/obj/Debug/netcoreapp3.1/IronBrew2 CLI.AssemblyInfo.cs
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/obj/Debug/netcoreapp3.1/IronBrew2 CLI.csproj.CoreCompileInputs.cache
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/obj/Debug/netcoreapp3.1/IronBrew.45603764.Up2Date
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/obj/Debug/netcoreapp3.1/IronBrew2 CLI.dll
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/obj/Debug/netcoreapp3.1/IronBrew2 CLI.pdb
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2 CLI/obj/Debug/netcoreapp3.1/IronBrew2 CLI.genruntimeconfig.cache

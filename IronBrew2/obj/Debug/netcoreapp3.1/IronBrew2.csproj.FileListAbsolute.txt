@@ -1,0 +1,9 @@
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/bin/Debug/netcoreapp3.1/IronBrew2.deps.json
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/bin/Debug/netcoreapp3.1/IronBrew2.dll
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/bin/Debug/netcoreapp3.1/IronBrew2.pdb
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/obj/Debug/netcoreapp3.1/IronBrew2.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/obj/Debug/netcoreapp3.1/IronBrew2.AssemblyInfoInputs.cache
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/obj/Debug/netcoreapp3.1/IronBrew2.AssemblyInfo.cs
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/obj/Debug/netcoreapp3.1/IronBrew2.csproj.CoreCompileInputs.cache
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/obj/Debug/netcoreapp3.1/IronBrew2.dll
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/obj/Debug/netcoreapp3.1/IronBrew2.pdb

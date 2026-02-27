@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "Bfly4nhlgvw=",
+  "success": true,
+  "projectFilePath": "/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/IronBrew2.csproj",
+  "expectedPackageFiles": [
+    "/Users/jdvassar/.nuget/packages/microsoft.netcore.platforms/2.0.0/microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "/Users/jdvassar/.nuget/packages/system.runtime.compilerservices.unsafe/4.6.0-preview.18571.3/system.runtime.compilerservices.unsafe.4.6.0-preview.18571.3.nupkg.sha512",
+    "/Users/jdvassar/.nuget/packages/system.text.encoding.codepages/4.6.0-preview.18571.3/system.text.encoding.codepages.4.6.0-preview.18571.3.nupkg.sha512",
+    "/Users/jdvassar/.nuget/packages/microsoft.netcore.app.ref/3.1.0/microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "/Users/jdvassar/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
+  ],
+  "logs": []
+}

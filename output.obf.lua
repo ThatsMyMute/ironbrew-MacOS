@@ -1,0 +1,407 @@
+--discord.gg/boronide, code generated using luamin.js™
+
+
+
+
+
+local d = string.byte;
+local r = string.char;
+local c = string.sub;
+local l = function(l, e)
+	l[#l + 1] = e
+end;
+local A = math.ldexp;
+local B = getfenv or function()
+	return _ENV
+end;
+local l = setmetatable;
+local h = select;
+local a = unpack or table.unpack;
+local f = tonumber;
+local function u(e)
+	local n = #e;
+	if (n == 0) then
+		return '';
+	end;
+	while n > 1 do
+		local c = {};
+		local o = 1;
+		local l = 1;
+		while l <= n do
+			if (l == n) then
+				c[o] = e[l];
+			else
+				c[o] = e[l] .. e[l + 1];
+			end;
+			o = o + 1;
+			l = l + 2;
+		end;
+		e = c;
+		n = #e;
+	end;
+	return e[1];
+end;
+local function s(d)
+	local e, n, o = "", "", {}
+	local t = 256;
+	local a = {}
+	for l = 0, t - 1 do
+		a[l] = r(l)
+	end;
+	local l = 1;
+	local function i()
+		local e = f(c(d, l, l), 36)
+		l = l + 1;
+		local n = f(c(d, l, l + e - 1), 36)
+		l = l + e;
+		return n
+	end;
+	e = r(i())
+	o[1] = e;
+	while l < #d do
+		local l = i()
+		if a[l] then
+			n = a[l]
+		else
+			n = e .. c(e, 1, 1)
+		end;
+		a[t] = e .. c(n, 1, 1)
+		o[#o + 1], e, t = n, n, t + 1
+	end;
+	return u(o)
+end;
+local i = s('21621B27521827427522N22L21Y21T22J2181427521B22K21Y22421W1F22621T2231F22J21Y22L22227Q21S2211F22G27C22321S22G22K1F1U1U1F22522227C2201F22K22N22E27Z22627U21821527H21Y22N22627T22K21A27H27H2671G28T28U21B1123321B1W27H21P21227H28Y21B21P27528T21928Z27H29E28T29B27H21829529C21B21729M21B29E27829F29E29E29P27H1Z21B29I21121B27429921B21321B28M29L27H2A721429O28U2742742AD28T2151X2AB2A029R29O2AA2A62AN2A829829F21B');
+local o = bit and bit.bxor or function(l, n)
+	local e, o = 1, 0
+	while l > 0 and n > 0 do
+		local c, a = l % 2, n % 2
+		if c ~= a then
+			o = o + e
+		end
+		l, n, e = (l - c) / 2, (n - a) / 2, e * 2
+	end
+	if l < n then
+		l = n
+	end
+	while l > 0 do
+		local n = l % 2
+		if n > 0 then
+			o = o + e
+		end
+		l, e = (l - n) / 2, e * 2
+	end
+	return o
+end
+local function n(e, l, n)
+	if n then
+		local l = (e / 2 ^ (l - 1)) % 2 ^ ((n - 1) - (l - 1) + 1);
+		return l - l % 1;
+	else
+		local l = 2 ^ (l - 1);
+		return (e % (l + l) >= l) and 1 or 0;
+	end;
+end;
+local l = 1;
+local function e()
+	local a, n, c, e = d(i, l, l + 3);
+	a = o(a, 47)
+	n = o(n, 47)
+	c = o(c, 47)
+	e = o(e, 47)
+	l = l + 4;
+	return (e * 16777216) + (c * 65536) + (n * 256) + a;
+end;
+local function f()
+	local e = o(d(i, l, l), 47);
+	l = l + 1;
+	return e;
+end;
+local function t()
+	local e, n = d(i, l, l + 2);
+	e = o(e, 47)
+	n = o(n, 47)
+	l = l + 2;
+	return (n * 256) + e;
+end;
+local function H()
+	local l = e();
+	local e = e();
+	local c = 1;
+	local o = (n(e, 1, 20) * (2 ^ 32)) + l;
+	local l = n(e, 21, 31);
+	local e = ((-1) ^ n(e, 32));
+	if (l == 0) then
+		if (o == 0) then
+			return e * 0;
+		else
+			l = 1;
+			c = 0;
+		end;
+	elseif (l == 2047) then
+		return (o == 0) and (e * (1 / 0)) or (e * (0 / 0));
+	end;
+	return A(e, l - 1023) * (c + (o / (2 ^ 52)));
+end;
+local s = e;
+local function A(e)
+	local n;
+	if (not e) then
+		e = s();
+		if (e == 0) then
+			return '';
+		end;
+	end;
+	n = c(i, l, l + e - 1);
+	l = l + e;
+	local e = {}
+	for l = 1, #n do
+		e[l] = r(o(d(c(n, l, l)), 47))
+	end
+	return u(e);
+end;
+local l = e;
+local function s(...)
+	return {
+		...
+	}, h('#', ...)
+end
+local function u()
+	local d = {};
+	local r = {};
+	local l = {};
+	local i = {
+		d,
+		r,
+		nil,
+		l
+	};
+	local l = e()
+	local o = {}
+	for n = 1, l do
+		local e = f();
+		local l;
+		if (e == 2) then
+			l = (f() ~= 0);
+		elseif (e == 1) then
+			l = H();
+		elseif (e == 3) then
+			l = A();
+		end;
+		o[n] = l;
+	end;
+	i[3] = f();
+	for i = 1, e() do
+		local l = f();
+		if (n(l, 1, 1) == 0) then
+			local c = n(l, 2, 3);
+			local a = n(l, 4, 6);
+			local l = {
+				t(),
+				t(),
+				nil,
+				nil
+			};
+			if (c == 0) then
+				l[3] = t();
+				l[4] = t();
+			elseif (c == 1) then
+				l[3] = e();
+			elseif (c == 2) then
+				l[3] = e() - (65536)
+			elseif (c == 3) then
+				l[3] = e() - (65536)
+				l[4] = t();
+			end;
+			if (n(a, 1, 1) == 1) then
+				l[2] = o[l[2]]
+			end
+			if (n(a, 2, 2) == 1) then
+				l[3] = o[l[3]]
+			end
+			if (n(a, 3, 3) == 1) then
+				l[4] = o[l[4]]
+			end
+			d[i] = l;
+		end
+	end;
+	for l = 1, e() do
+		r[l - 1] = u();
+	end;
+	return i;
+end;
+local function f(l, e, d)
+	local e = l[1];
+	local n = l[2];
+	local l = l[3];
+	return function(...)
+		local c = e;
+		local e = n;
+		local o = l;
+		local l = s
+		local n = 1;
+		local l = -1;
+		local f = {};
+		local i = {
+			...
+		};
+		local t = h('#', ...) - 1;
+		local l = {};
+		local e = {};
+		for l = 0, t do
+			if (l >= o) then
+				f[l - o] = i[l + 1];
+			else
+				e[l] = i[l + 1];
+			end;
+		end;
+		local l = t - o + 1
+		local l;
+		local o;
+		while true do
+			l = c[n];
+			o = l[1];
+			if o <= 8 then
+				if o <= 3 then
+					if o <= 1 then
+						if o > 0 then
+							local o = l[2]
+							local c = {
+								e[o](a(e, o + 1, l[3]))
+							};
+							local n = 0;
+							for l = o, l[4] do
+								n = n + 1;
+								e[l] = c[n];
+							end
+						else
+							local n = l[2]
+							e[n](a(e, n + 1, l[3]))
+						end;
+					elseif o == 2 then
+						e[l[2]] = e[l[3]];
+					else
+						n = l[3];
+					end;
+				elseif o <= 5 then
+					if o == 4 then
+						e[l[2]] = l[3];
+					else
+						local n = l[2]
+						e[n](a(e, n + 1, l[3]))
+					end;
+				elseif o <= 6 then
+					do
+						return
+					end;
+				elseif o > 7 then
+					e[l[2]] = e[l[3]];
+				else
+					local o = l[2];
+					local a = l[4];
+					local c = o + 2
+					local o = {
+						e[o](e[o + 1], e[c])
+					};
+					for l = 1, a do
+						e[c + l] = o[l];
+					end;
+					local o = o[1]
+					if o then
+						e[c] = o
+						n = l[3];
+					else
+						n = n + 1;
+					end;
+				end;
+			elseif o <= 13 then
+				if o <= 10 then
+					if o == 9 then
+						local t;
+						local i;
+						local o;
+						e[l[2]] = d[l[3]];
+						n = n + 1;
+						l = c[n];
+						e[l[2]] = l[3];
+						n = n + 1;
+						l = c[n];
+						o = l[2]
+						e[o](e[o + 1])
+						n = n + 1;
+						l = c[n];
+						e[l[2]] = d[l[3]];
+						n = n + 1;
+						l = c[n];
+						e[l[2]] = l[3];
+						n = n + 1;
+						l = c[n];
+						e[l[2]] = l[3];
+						n = n + 1;
+						l = c[n];
+						o = l[2]
+						i = {
+							e[o](a(e, o + 1, l[3]))
+						};
+						t = 0;
+						for l = o, l[4] do
+							t = t + 1;
+							e[l] = i[t];
+						end
+						n = n + 1;
+						l = c[n];
+						n = l[3];
+					else
+						e[l[2]] = d[l[3]];
+					end;
+				elseif o <= 11 then
+					local l = l[2]
+					e[l](e[l + 1])
+				elseif o > 12 then
+					n = l[3];
+				else
+					do
+						return
+					end;
+				end;
+			elseif o <= 15 then
+				if o == 14 then
+					local c = l[2];
+					local a = l[4];
+					local o = c + 2
+					local c = {
+						e[c](e[c + 1], e[o])
+					};
+					for l = 1, a do
+						e[o + l] = c[l];
+					end;
+					local c = c[1]
+					if c then
+						e[o] = c
+						n = l[3];
+					else
+						n = n + 1;
+					end;
+				else
+					e[l[2]] = d[l[3]];
+				end;
+			elseif o <= 16 then
+				e[l[2]] = l[3];
+			elseif o == 17 then
+				local n = l[2]
+				local c = {
+					e[n](a(e, n + 1, l[3]))
+				};
+				local o = 0;
+				for l = n, l[4] do
+					o = o + 1;
+					e[l] = c[o];
+				end
+			else
+				local l = l[2]
+				e[l](e[l + 1])
+			end;
+			n = n + 1;
+		end;
+	end;
+end;
+return f(u(), {}, B())();

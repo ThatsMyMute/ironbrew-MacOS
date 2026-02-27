@@ -40,7 +40,6 @@ namespace IronBrew2.Bytecode_Library.Bytecode
 		Close,
 		Closure,
 		VarArg,
-		
 		//Custom VM opcodes
 		SetTop,
 		PushStack,

@@ -71,30 +71,82 @@ namespace IronBrew2.Obfuscator.VM_Generation
 			return compressed;
 		}
 
-		public static string ToBase36(ulong value)
-        {
-            const string base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            var sb = new StringBuilder(13);
-            do
-            {
-                sb.Insert(0, base36[(byte)(value % 36)]);
-                value /= 36;
-            } while (value != 0);
-            return sb.ToString();
-        }
+		private static string BuildCodecAlphabet(Random random)
+		{
+			char[] chars =
+				"天地玄黄宇宙洪荒日月盈昃辰宿列张寒来暑往秋收冬藏闰余成岁律吕调阳云腾致雨露结为霜金生丽水玉出昆冈剑号巨阙珠称夜光果珍李柰菜重芥姜".ToCharArray();
+			chars = chars.OrderBy(_ => random.Next()).ToArray();
+			return new string(chars);
+		}
 
-		public static string CompressedToString(List<int> compressed)
+		public static string ToCustomBase(ulong value, string alphabet)
+		{
+			ulong radix = (ulong)alphabet.Length;
+			var sb = new StringBuilder(13);
+			do
+			{
+				sb.Insert(0, alphabet[(int)(value % radix)]);
+				value /= radix;
+			} while (value != 0);
+			return sb.ToString();
+		}
+
+		public static string CompressedToString(List<int> compressed, string alphabet)
 		{
 			StringBuilder sb = new StringBuilder();
 			foreach (int i in compressed)
 			{
-				string n = ToBase36((ulong)i);
-				
-				sb.Append(ToBase36((ulong)n.Length));
+				string n = ToCustomBase((ulong)i, alphabet);
+				if (n.Length >= alphabet.Length)
+					throw new Exception("Encoded token length exceeded codec alphabet range.");
+
+				sb.Append(alphabet[n.Length]);
 				sb.Append(n);
 			}
 
 			return sb.ToString();
+		}
+		
+		private static string EscapeLuaSingleQuoted(string value) =>
+			value.Replace("\\", "\\\\")
+				.Replace("'", "\\'")
+				.Replace("\r", "\\r")
+				.Replace("\n", "\\n");
+
+		private static string BuildDecoyNoise(Random random)
+		{
+			List<string> decoys = new List<string>
+			{
+				"ironbrew on mac",
+				"made by thatsmymute",
+				"bytecode tastes like static",
+				"nothing to see here",
+				"constants are sleeping",
+				"vm whispers in base36",
+				"not the real payload",
+				"decoy lane open",
+				"noise field enabled"
+			};
+
+			for (int i = 0; i < 4; i++)
+				decoys.Add("ib2-noise-" + Guid.NewGuid().ToString("N").Substring(0, 10));
+
+			decoys = decoys.OrderBy(_ => random.Next()).Take(8).ToList();
+
+			StringBuilder noise = new StringBuilder();
+			noise.Append("local __ib2_noise={");
+			for (int i = 0; i < decoys.Count; i++)
+			{
+				if (i != 0)
+					noise.Append(',');
+				noise.Append('\'');
+				noise.Append(EscapeLuaSingleQuoted(decoys[i]));
+				noise.Append('\'');
+			}
+			noise.Append("};");
+			noise.Append("local function __ib2_bait(k)local v=__ib2_noise[(k % #__ib2_noise)+1];return Sub(v,1,#v);end;");
+			noise.Append("if false then ByteString=__ib2_bait(3);end;");
+			return noise.ToString();
 		}
 
 		public List<OpMutated> GenerateMutations(List<VOpcode> opcodes)
@@ -422,6 +474,25 @@ local Select       = select;
 
 local Unpack = unpack or table.unpack;
 local ToNumber = tonumber;
+local PCall = pcall;
+local RawGet = rawget;
+local Dbg = RawGet(GetFEnv(), 'debug');
+local DbgInfo = Dbg and Dbg.getinfo;
+
+local function EnsureNative(Name, Fn)
+	if DbgInfo then
+		local Ok, Info = PCall(DbgInfo, Fn);
+		if (not Ok) or (not Info) or (Info.what ~= 'C') then
+			error('IRONBREW TAMPER DETECTED (' .. Name .. ')');
+		end;
+	end;
+end;
+
+EnsureNative('string.byte', Byte);
+EnsureNative('string.char', Char);
+EnsureNative('string.sub', Sub);
+EnsureNative('tonumber', ToNumber);
+EnsureNative('math.ldexp', LDExp);
 
 local function Concat(T)
 	local Len = #T;
@@ -450,12 +521,22 @@ local function Concat(T)
 
 	return T[1];
 end;";
+			vm += BuildDecoyNoise(r);
 
-			if (settings.BytecodeCompress)
-			{
-				vm += "local function decompress(b)local c,d,e=\"\",\"\",{}local f=256;local g={}for h=0,f-1 do g[h]=Char(h)end;local i=1;local function k()local l=ToNumber(Sub(b, i,i),36)i=i+1;local m=ToNumber(Sub(b, i,i+l-1),36)i=i+l;return m end;c=Char(k())e[1]=c;while i<#b do local n=k()if g[n]then d=g[n]else d=c..Sub(c, 1,1)end;g[f]=c..Sub(d, 1,1)e[#e+1],c,f=d,d,f+1 end;return Concat(e)end;";
-				vm += "local ByteString=decompress('" + CompressedToString(Compress(bs)) + "');\n";
-			}
+				if (settings.BytecodeCompress)
+				{
+					string codecAlphabet = BuildCodecAlphabet(r);
+					string escapedAlphabet = EscapeLuaSingleQuoted(codecAlphabet);
+					vm += "local __ib2_alphabet='" + escapedAlphabet + "';";
+					vm += "local function __ib2_next_char(s,p)local b=Byte(s,p,p);if not b then return nil,p end;local n=1;if b>=240 then n=4 elseif b>=224 then n=3 elseif b>=192 then n=2 end;return Sub(s,p,p+n-1),p+n end;";
+					vm += "local function __ib2_count_chars(s)local n=0;local p=1;while p<=#s do local _,np=__ib2_next_char(s,p);if not np then break end;n=n+1;p=np end;return n end;";
+					vm += "local __ib2_base=__ib2_count_chars(__ib2_alphabet);";
+					vm += "local __ib2_rev={};do local p=1;local idx=0;while p<=#__ib2_alphabet do local ch,np=__ib2_next_char(__ib2_alphabet,p);if not ch then break end;__ib2_rev[ch]=idx;idx=idx+1;p=np end;end;";
+					vm += "local function __ib2_to_num(s)local v=0;local p=1;while p<=#s do local ch,np=__ib2_next_char(s,p);if not ch then break end;v=v*__ib2_base+(__ib2_rev[ch] or 0);p=np end;return v;end;";
+					vm += "local function __ib2_take_chars(s,p,count)local sp=p;for _=1,count do local _,np=__ib2_next_char(s,p);if not np then error('IRONBREW CODEC ERROR') end;p=np end;return Sub(s,sp,p-1),p end;";
+					vm += "local function decompress(b)local c,d,e=\"\",\"\",{}local f=256;local g={}for h=0,f-1 do g[h]=Char(h)end;local i=1;local function k()local lenSym;lenSym,i=__ib2_next_char(b,i);if not lenSym then error('IRONBREW CODEC ERROR') end;local l=__ib2_rev[lenSym] or -1;if l<=0 then error('IRONBREW CODEC ERROR');end;local tok;tok,i=__ib2_take_chars(b,i,l);local m=__ib2_to_num(tok);return m end;c=Char(k())e[1]=c;while i<=#b do local n=k()if g[n]then d=g[n]else d=c..Sub(c,1,1)end;g[f]=c..Sub(d,1,1)e[#e+1],c,f=d,d,f+1 end;return Concat(e)end;";
+					vm += "local ByteString=decompress('" + CompressedToString(Compress(bs), codecAlphabet) + "');\n";
+				}
 			else
 			{
 				vm += "ByteString='";
@@ -542,7 +623,7 @@ end;";
 				}
 			}
 
-			vm += "return Chunk;end;";
+				vm += "WipeTable(Consts);return ProtectChunk(Chunk);end;";
 			vm += settings.PreserveLineInfo ? VMStrings.VMP2_LI : VMStrings.VMP2;
 
 			int maxFunc = 0;

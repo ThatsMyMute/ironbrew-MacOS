@@ -80,6 +80,12 @@ local function gFloat()
 	return LDExp(Sign, Exponent - 1023) * (IsNormal + (Mantissa / (2 ^ 52)));
 end;
 
+local function WipeTable(T)
+	for K in next, T do
+		T[K] = nil;
+	end;
+end;
+
 local gSizet = gBits32;
 local function gString(Len)
     local Str;
@@ -93,16 +99,57 @@ local function gString(Len)
     Str	= Sub(ByteString, Pos, Pos + Len - 1);
     Pos = Pos + Len;
 
-	local FStr = {}
+	local Bytes = {};
 	for Idx = 1, #Str do
-		FStr[Idx] = Char(BitXOR(Byte(Sub(Str, Idx, Idx)), XOR_KEY))
-	end
+		Bytes[Idx] = BitXOR(Byte(Sub(Str, Idx, Idx)), XOR_KEY);
+	end;
 
-    return Concat(FStr);
+	local Parts = {};
+	local P = 1;
+	while (P <= #Bytes) do
+		local Q = P + 31;
+		if (Q > #Bytes) then
+			Q = #Bytes;
+		end;
+		Parts[#Parts + 1] = Char(Unpack(Bytes, P, Q));
+		P = Q + 1;
+	end;
+
+	Str = nil;
+	WipeTable(Bytes);
+	local Decoded = Concat(Parts);
+	WipeTable(Parts);
+	return Decoded;
 end;
 
 local gInt = gBits32;
 local function _R(...) return {...}, Select('#', ...) end
+
+local function ProtectTable(T)
+	return Setmetatable(T, {
+		__metatable = 'locked',
+		__iter = function()
+			return function()
+				return nil;
+			end;
+		end
+	});
+end;
+
+local function ProtectChunk(Chunk)
+	ProtectTable(Chunk);
+	ProtectTable(Chunk[1]);
+	ProtectTable(Chunk[2]);
+	ProtectTable(Chunk[4]);
+
+	for _, Child in next, Chunk[2] do
+		if Child then
+			ProtectChunk(Child);
+		end;
+	end;
+
+	return Chunk;
+end;
 
 local function Deserialize()
     local Instrs = {};

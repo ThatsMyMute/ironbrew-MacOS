@@ -7,3 +7,4 @@
 /Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/obj/Debug/netcoreapp3.1/IronBrew2.csproj.CoreCompileInputs.cache
 /Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/obj/Debug/netcoreapp3.1/IronBrew2.dll
 /Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/obj/Debug/netcoreapp3.1/IronBrew2.pdb
+/Users/jdvassar/Desktop/ironbrew-2-master/IronBrew2/obj/Debug/netcoreapp3.1/IronBrew2.sourcelink.json

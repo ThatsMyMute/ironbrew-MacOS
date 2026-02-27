@@ -155,3 +155,39 @@ A hostile runtime can still hook other globals before loader startup, such as:
 If needed, add loader integrity checks and early abort behavior for patched primitives.
 
 * Ps yes ai wrote this description I have other things to do...
+## Known Constant Dump Methods
+
+Thanks to Norb for finding these 
+Method #1 
+
+Targeted string reconstruction dump.
+
+```
+local dump = "";
+    for e = 1, #n do
+        l[e] = h(o(f(t(n, e, e)), 39));
+         dump = dump .. l[e]
+    end;
+    warn(dump)
+```
+Method #2 Deep table traversal
+
+```
+return function(...)
+        local t = l;
+        local B = n;
+        for i, v in n do 
+            for i2, v2 in v do 
+                if typeof(v2) == "table" then
+                    for i3, v3 in v2 do 
+                        for i4, v4 in v3 do 
+                            warn(v4)
+                        end
+                    end
+                end
+                print(v2)
+                
+            end
+        end
+        local o = e;
+```

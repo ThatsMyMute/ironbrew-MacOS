@@ -56,12 +56,12 @@ Basic:
 ./run-obfuscate.sh <input.lua> [output.lua]
 ```
 
-With custom watermark tags:
+With custom watermark tags (this goes in the comment at the top):
 
 ```bash
 ./run-obfuscate.sh \
   --tag "ironbrew on mac" \
-  --tag "made by thatsmymute" \
+  --tag "whatever u want here" \
   input.lua output.obf.lua
 ```
 

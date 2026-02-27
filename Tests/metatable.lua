@@ -18,4 +18,4 @@ mt.__namecall = function(...)
 end
 
 print'aaaa'
-print'just another piece of the puzzle'
+print'just a piece of the puzzle'
